@@ -5,7 +5,7 @@
     <title>OCR Web App</title>
     <style>
         body {
-            background-image: url('{{ url_for('static', filename='background.gif') }}');
+            background-image: url('{{ url_for(' static', filename=' background.gif') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -120,16 +120,12 @@
             height: 200px;
             margin-bottom: 1rem;
             border-radius: 5px;
-            padding: 5px;
+            padding: 10px;
             resize: vertical;
             color: black;
-
-            /* ทำให้ข้อความอยู่ตรงกลาง */
-            display: flex;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            line-height: 1.5;
+            display: block;
+            line-height: normal;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
