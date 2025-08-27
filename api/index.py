@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, render_template_string
+from flask import Flask, request, Response, render_template
 import requests
 import traceback
 
@@ -9,29 +9,6 @@ app = Flask(
 )
 
 OCR_API_KEY = "K86591924088957"
-
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html>
-<head>
-<title>OCR Web App</title>
-</head>
-<body>
-<h1>OCR Web Application</h1>
-<form method="POST" enctype="multipart/form-data">
-<input type="file" name="image" required>
-<button type="submit">Extract Text</button>
-</form>
-{% if text_result %}
-<textarea readonly style="width:100%;height:200px;">{{ text_result }}</textarea>
-<form method="POST" action="/download">
-<input type="hidden" name="text" value="{{ text_result }}">
-<button type="submit">Download as .txt</button>
-</form>
-{% endif %}
-</body>
-</html>
-"""
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -58,7 +35,8 @@ def index():
         except Exception as e:
             print(traceback.format_exc())
             text_result = f"OCR API Error: {str(e)}"
-    return render_template_string(HTML_TEMPLATE, text_result=text_result)
+
+    return render_template("index.html", text_result=text_result)
 
 
 @app.route("/download", methods=["POST"])
